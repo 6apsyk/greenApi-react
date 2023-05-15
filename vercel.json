@@ -1,0 +1,8 @@
+{
+    "build": {
+      "env": {
+        "EXTERNAL_MODULES": "axios"
+      }
+    }
+  }
+  
