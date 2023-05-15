@@ -13,12 +13,7 @@ export default function Contact() {
 
     const [text, setText] = useState("");
 
-    const [idMessage, setIdMessage] = useState(null);
-
     const [messages, setMessages] = useState([]);
-    console.log("messages", messages);
-
-    console.log("idMessage", idMessage);
 
     const onSubmit = async () => {
         clearTimeout(timerRef.current);
@@ -34,8 +29,6 @@ export default function Contact() {
                 message: text,
             },
         });
-        console.log(data);
-        setIdMessage(data ? data.idMessage : null);
         setText("");
         onReload();
     };
@@ -50,11 +43,10 @@ export default function Contact() {
                 "Content-Type": "application/json",
             },
         });
-        console.log("Получение", data);
 
         if (data !== null) {
             const url2 = `https://api.green-api.com/waInstance${idInstance}/DeleteNotification/${apiTokenInstance}/${data?.receiptId}`;
-            const response2 = await axios({
+            await axios({
                 url: url2,
                 method: "delete",
                 headers: {
@@ -62,7 +54,6 @@ export default function Contact() {
                 },
                 data: {},
             });
-            console.log("delete", response2);
 
             if (
                 data.body.typeWebhook === "incomingMessageReceived" ||
@@ -89,7 +80,6 @@ export default function Contact() {
     useEffect(() => {
         return () => {
             setMessages([]);
-            setIdMessage(null);
             clearTimeout(timerRef.current);
         };
     }, []);
