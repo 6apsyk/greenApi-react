@@ -2,9 +2,6 @@ import axios from "axios";
 
 const baseUrl = "https://api.green-api.com";
 
-// const idInstance = JSON.parse(localStorage.getItem("config")).idInstance;
-// const apiTokenInstance = JSON.parse(localStorage.getItem("config")).apiTokenInstance;
-
 export const greenApi = {
     login: async (id, token) => {
         try {

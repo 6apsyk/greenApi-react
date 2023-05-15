@@ -5,10 +5,8 @@ import {greenApi} from "../../api";
 
 // eslint-disable-next-line react/prop-types
 export const FormLogin = ({className, onClose}) => {
-    const [idInstance, setIdInstance] = useState("1101819374");
-    const [apiTokenInstance, setApiTokenInstance] = useState(
-        "d844d8c5811a4bffacdfc6780b3b6912f5f51522c781459a96"
-    );
+    const [idInstance, setIdInstance] = useState("");
+    const [apiTokenInstance, setApiTokenInstance] = useState("");
     const [error, setError] = useState(null);
 
     const onLogin = () => {

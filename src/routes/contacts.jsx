@@ -3,13 +3,8 @@ import {useParams} from "react-router-dom";
 import axios from "axios";
 import {Chat} from "../components/Chat/Chat";
 
-const idInstance = "1101819374"; // your instance id
-const apiTokenInstance = "d844d8c5811a4bffacdfc6780b3b6912f5f51522c781459a96"; // your instance api token
-
-// const msg = {
-//     type: "incoming",
-//     type: "outgoing",
-// };
+const idInstance = JSON.parse(localStorage.getItem("config")).idInstance;
+const apiTokenInstance = JSON.parse(localStorage.getItem("config")).apiTokenInstance;
 
 export default function Contact() {
     const {contactId} = useParams();
