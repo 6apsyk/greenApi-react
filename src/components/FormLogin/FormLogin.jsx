@@ -36,7 +36,7 @@ export const FormLogin = ({className, onClose}) => {
             />
             <input
                 className={cls.input}
-                placeholder="Веедите idInapiTokenInstancestance"
+                placeholder="Веедите apiTokenInstance"
                 value={apiTokenInstance}
                 onChange={e => setApiTokenInstance(e.target.value)}
             />

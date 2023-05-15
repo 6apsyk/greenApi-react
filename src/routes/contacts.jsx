@@ -3,11 +3,11 @@ import {useParams} from "react-router-dom";
 import axios from "axios";
 import {Chat} from "../components/Chat/Chat";
 
-const idInstance = JSON.parse(localStorage.getItem("config")).idInstance;
-const apiTokenInstance = JSON.parse(localStorage.getItem("config")).apiTokenInstance;
-
 export default function Contact() {
     const {contactId} = useParams();
+
+    const idInstance = JSON.parse(localStorage.getItem("config"))?.idInstance;
+    const apiTokenInstance = JSON.parse(localStorage.getItem("config"))?.apiTokenInstance;
 
     const timerRef = useRef(null);
 
@@ -41,6 +41,7 @@ export default function Contact() {
     };
 
     const onReload = async () => {
+        clearTimeout(timerRef.current);
         const url = `https://api.green-api.com/waInstance${idInstance}/ReceiveNotification/${apiTokenInstance}`;
         const {data} = await axios({
             url,
