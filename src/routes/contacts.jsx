@@ -113,9 +113,9 @@ export default function Contact() {
                     <div>
                         <button onClick={onSubmit}>Отправить</button>
                     </div>
-                    <div>
+                    {/* <div>
                         <button onClick={onReload}>Обновить</button>
-                    </div>
+                    </div> */}
                     {/* <div>
                         <button onClick={onHistory}>История чата</button>
                     </div> */}
