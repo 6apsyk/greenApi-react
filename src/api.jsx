@@ -1,18 +1,14 @@
-import axios from "axios";
-
 const baseUrl = "https://api.green-api.com";
 
 export const greenApi = {
     login: async (id, token) => {
         try {
             const url = `${baseUrl}/waInstance${id}/getStateInstance/${token}`;
-            const {data} = await axios({
-                url,
-                method: "get",
-                headers: {
-                    "Content-Type": "application/json",
-                },
+            const response = await fetch(url, {
+                method: "GET",
             });
+
+            const data = await response.json();
 
             return data;
         } catch (error) {

@@ -1,6 +1,5 @@
 import {useEffect, useRef, useState} from "react";
 import {useParams} from "react-router-dom";
-import axios from "axios";
 import {Chat} from "../components/Chat/Chat";
 
 export default function Contact() {
@@ -17,42 +16,40 @@ export default function Contact() {
 
     const onSubmit = async () => {
         clearTimeout(timerRef.current);
-        const url = `https://api.green-api.com/waInstance${idInstance}/SendMessage/${apiTokenInstance}`;
-        await axios({
-            url,
-            method: "post",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            data: {
-                chatId: `${contactId}@c.us`,
-                message: text,
-            },
-        });
-        setText("");
-        onReload();
+
+        try {
+            const url = `https://api.green-api.com/waInstance${idInstance}/SendMessage/${apiTokenInstance}`;
+            await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    chatId: `${contactId}@c.us`,
+                    message: text,
+                }),
+            });
+            setText("");
+            onReload();
+        } catch (error) {
+            console.log(error.message);
+        }
     };
 
     const onReload = async () => {
         clearTimeout(timerRef.current);
         const url = `https://api.green-api.com/waInstance${idInstance}/ReceiveNotification/${apiTokenInstance}`;
-        const {data} = await axios({
-            url,
-            method: "get",
-            headers: {
-                "Content-Type": "application/json",
-            },
+        const response = await fetch(url, {
+            method: "GET",
         });
+
+        const data = await response.json();
 
         if (data !== null) {
             const url2 = `https://api.green-api.com/waInstance${idInstance}/DeleteNotification/${apiTokenInstance}/${data?.receiptId}`;
-            await axios({
+            await fetch(url2, {
                 url: url2,
-                method: "delete",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                data: {},
+                method: "DELETE",
             });
 
             if (
