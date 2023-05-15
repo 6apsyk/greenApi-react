@@ -18,7 +18,7 @@ export default function Contact() {
     const onSubmit = async () => {
         clearTimeout(timerRef.current);
         const url = `https://api.green-api.com/waInstance${idInstance}/SendMessage/${apiTokenInstance}`;
-        const {data} = await axios({
+        await axios({
             url,
             method: "post",
             headers: {
